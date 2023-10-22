@@ -1,0 +1,42 @@
+package main
+
+import (
+    "fyne.io/fyne/v2/app"
+    "fyne.io/fyne/v2/canvas"
+    "fyne.io/fyne/v2/theme"
+    "fyne.io/fyne/v2/widget"
+    "fyne.io/fyne/v2/container"
+    "fyne.io/fyne/v2/theme/painter"
+    "image/color"
+)
+
+func main() {
+    myApp := app.New()
+    myWindow := myApp.NewWindow("Hacktoberfest Logo")
+
+    // Hacktoberfest text label
+    hacktoberfestLabel := canvas.NewText("Hacktoberfest", color.RGBA{255, 69, 0, 255})
+    hacktoberfestLabel.Alignment = fyne.TextAlignCenter
+    hacktoberfestLabel.TextSize = theme.TextSizeLarge
+    hacktoberfestLabel.TextStyle.Bold = true
+
+    // Octocat image
+    octocatImage := canvas.NewImageFromResource(theme.FyneLogo())
+    octocatImage.SetMinSize(fyne.NewSize(100, 100))
+
+    // Combine elements in a container
+    content := container.NewVBox(
+        hacktoberfestLabel,
+        widget.NewSeparator(),
+        octocatImage,
+    )
+
+    // Set background color
+    content.BackgroundColor = painter.NewColor(40, 42, 54)
+
+    // Set window content
+    myWindow.SetContent(content)
+    myWindow.Resize(fyne.NewSize(300, 300))
+    myWindow.CenterOnScreen()
+    myWindow.ShowAndRun()
+}
